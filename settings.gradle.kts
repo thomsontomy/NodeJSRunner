@@ -13,5 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "NodeJSAndroid"
-include(":app")
 include(":NodeJS")
+include(":sampleappwithjsfile")
+include(":sampleappwithjscode")
+include(":sampleappwithcomplexjs")

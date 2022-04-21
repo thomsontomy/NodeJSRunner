@@ -13,7 +13,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/NodeJS" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/sampleappwithcomplexjs" />
+            <option value="$PROJECT_DIR$/sampleappwithjscode" />
+            <option value="$PROJECT_DIR$/sampleappwithjsfile" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

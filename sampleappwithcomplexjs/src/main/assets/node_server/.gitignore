@@ -1,0 +1,6 @@
+package-lock.json
+dist/
+logs/
+node_modules/
+yarn.lock
+/node_modules/
