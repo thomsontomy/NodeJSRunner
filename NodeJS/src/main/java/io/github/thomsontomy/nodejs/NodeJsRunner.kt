@@ -11,6 +11,7 @@ class NodeJsRunner(private val context: Context) {
         startNodeWithArguments(
             arrayOf(
                 "node",
+                "--trace-uncaught",
                 "-e",
                 jsCode
             )
