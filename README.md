@@ -1,5 +1,7 @@
 ## NodeJS Runner for Android
 
+[![CircleCI](https://circleci.com/gh/thomsontomy/NodeJSRunner/tree/main.svg?style=svg)](https://circleci.com/gh/thomsontomy/NodeJSRunner/tree/main)
+
 ### Usage
 
 * Include the dependency

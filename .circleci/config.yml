@@ -30,9 +30,9 @@ jobs:
           test-command: ./gradlew lint testDebug --continue
 
       # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
+      #- android/start-emulator-and-run-tests:
+      #    test-command: ./gradlew connectedDebugAndroidTest
+      #    system-image: system-images;android-25;google_apis;x86
 
       # And finally run the release build
       - run:
@@ -40,10 +40,32 @@ jobs:
           command: |
             ./gradlew assembleRelease
 
-# Invoke jobs via workflows
+  publish-library:
+    executor:
+      name: android/android-machine
+
+    steps:
+      - checkout
+      - run:
+          name: Publish the library
+          environment:
+            ORG_GRADLE_PROJECT_signingInMemoryKey: $GPG_PRIVATE_KEY
+            ORG_GRADLE_PROJECT_signingInMemoryKeyId: $SIGNING_KEY_ID
+            ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: $SIGNING_KEY_PASSWORD
+            ORG_GRADLE_PROJECT_mavenCentralUsername: $OSSRH_USERNAME
+            ORG_GRADLE_PROJECT_mavenCentralPassword: $OSSRH_PASSWORD
+          command: |
+            export ORG_GRADLE_PROJECT_signingInMemoryKey=$GPG_PRIVATE_KEY
+            export ORG_GRADLE_PROJECT_signingInMemoryKeyId=$SIGNING_KEY_ID
+            export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=$SIGNING_KEY_PASSWORD
+            export ORG_GRADLE_PROJECT_mavenCentralUsername=$OSSRH_USERNAME
+            export ORG_GRADLE_PROJECT_mavenCentralPassword=$OSSRH_PASSWORD
+            ./gradlew publish
+
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  main_release: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test
+      - publish-library
